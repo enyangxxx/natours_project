@@ -1,0 +1,46 @@
+body {
+    /* Define everything related to font in body selector, not in the universal selector */
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    /* Vertical height (space above the text) of a line */
+    line-height: 1.7;
+    color: $color-grey-dark;
+    padding: 3rem;
+}
+
+.heading-primary {
+    color: $color-white;
+    text-transform: uppercase;
+
+    /* Avoids the animated texts shaking */
+    backface-visibility: hidden;
+    /* Distance between heading and the button */
+    margin-bottom: 6rem;
+
+    &--main {
+        /* Displays an element as a block element (like <p>). It starts on a new line, and takes up the whole width */
+        display: block;
+        font-size: 6rem;
+        font-weight: 400;
+        letter-spacing: 3.5rem;
+
+        animation-name: moveFromLeft;
+        animation-duration: 1s;
+        /* How the animation will progress over time (e.g. starts slowly first, then accelerates) */
+        animation-timing-function: ease-out;
+
+        /* 
+        animation-delay: 1s; Delay before animation starts
+        animation-iteration-count: 3; How often the animation plays
+        */
+    }
+
+    &--sub {
+        display: block;
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 1.43rem;
+
+        animation: moveFromRight 1s ease-out;
+    }
+}

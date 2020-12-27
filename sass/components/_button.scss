@@ -1,0 +1,65 @@
+.btn {
+    /* When the button has a link (normal state) or when the button has been clicked before */
+    &:link, &:visited {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem;
+        /* https://www.w3schools.com/css/tryit.asp?filename=trycss_inline-block_span1 */
+        display: inline-block;
+        border-radius: 10rem;
+        transition: all .2s;
+        position: relative;
+        font-size: 1.6rem;
+    }
+
+    &:hover {
+        transform: translateY(-0.3rem);
+        /* shadow in x, shadow in y, blur, rgba (rgb + transparency) */
+        box-shadow: 0 1rem 2rem rgba($color-black,.2);
+
+        &::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            /* Fade something out, sets something to invisible */
+            opacity: 0;
+        }
+    }
+
+    /* When the button is clicked */
+    &:active {
+        transform: translateY(-0.1rem);
+        box-shadow: 0 0.5rem 1rem rgba($color-black,.2);
+    }
+
+    &--white {
+        background-color: $color-white;
+        color: $color-grey-dark;
+
+        &::after{
+            background-color: $color-white;
+        }
+    }
+
+    /* ::after -> Insert something after the content of the element. */
+    &::after {
+        /* In order to make the afer pseudo element to appear, we have to specify the content property. It can be even empty. */
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 10rem;
+        /* The absolute position refers to the last relatively positioned element. */
+        position: absolute;
+        top: 0;
+        left: 0;
+        /* Put the after pseudo content behind the actual button. */
+        z-index: -1;
+        transition: all .4s;
+    }
+
+    &--animated {
+        /* The .75s refers to delay */
+        animation: moveFromBottom .5s ease-out .75s;
+        /* Automatically apply the styles of 0% before the animation starts */
+        animation-fill-mode: backwards;
+    }
+}

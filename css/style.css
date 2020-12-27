@@ -1,0 +1,167 @@
+/* Universal selector to reset browsers. */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  /* Make the box-sizing property inherit */
+  box-sizing: inherit; }
+
+html {
+  /*Default browser font-size in px is 16. If we want 10px, we need 62.5% because 10/16 = 62.5% */
+  font-size: 62.5%; }
+
+body {
+  /* 
+    Borders and paddings are no longer added. A width of 200px is indeed 200px.
+    https://www.mediaevent.de/css/box-sizing.html
+    */
+  box-sizing: border-box; }
+
+@keyframes moveFromLeft {
+  /* For browser performance, it's best to only animate two different properties: opacity & transform */
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem); }
+  80% {
+    transform: translateX(2rem); }
+  100% {
+    opacity: 1;
+    transform: translateX(0); } }
+
+@keyframes moveFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem); }
+  80% {
+    transform: translateX(-2rem); }
+  100% {
+    opacity: 1;
+    transform: translateX(0); } }
+
+@keyframes moveFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(3rem); }
+  100% {
+    opacity: 1;
+    transform: translateY(0); } }
+
+body {
+  /* Define everything related to font in body selector, not in the universal selector */
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /* Vertical height (space above the text) of a line */
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem; }
+
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  /* Avoids the animated texts shaking */
+  backface-visibility: hidden;
+  /* Distance between heading and the button */
+  margin-bottom: 6rem; }
+  .heading-primary--main {
+    /* Displays an element as a block element (like <p>). It starts on a new line, and takes up the whole width */
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    animation-name: moveFromLeft;
+    animation-duration: 1s;
+    /* How the animation will progress over time (e.g. starts slowly first, then accelerates) */
+    animation-timing-function: ease-out;
+    /* 
+        animation-delay: 1s; Delay before animation starts
+        animation-iteration-count: 3; How often the animation plays
+        */ }
+  .heading-primary--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.43rem;
+    animation: moveFromRight 1s ease-out; }
+
+.btn {
+  /* When the button has a link (normal state) or when the button has been clicked before */
+  /* When the button is clicked */
+  /* ::after -> Insert something after the content of the element. */ }
+  .btn:link, .btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    /* https://www.w3schools.com/css/tryit.asp?filename=trycss_inline-block_span1 */
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all .2s;
+    position: relative;
+    font-size: 1.6rem; }
+  .btn:hover {
+    transform: translateY(-0.3rem);
+    /* shadow in x, shadow in y, blur, rgba (rgb + transparency) */
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
+    .btn:hover::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      /* Fade something out, sets something to invisible */
+      opacity: 0; }
+  .btn:active {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+  .btn--white {
+    background-color: #fff;
+    color: #777; }
+    .btn--white::after {
+      background-color: #fff; }
+  .btn::after {
+    /* In order to make the afer pseudo element to appear, we have to specify the content property. It can be even empty. */
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    /* The absolute position refers to the last relatively positioned element. */
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* Put the after pseudo content behind the actual button. */
+    z-index: -1;
+    transition: all .4s; }
+  .btn--animated {
+    /* The .75s refers to delay */
+    animation: moveFromBottom .5s ease-out .75s;
+    /* Automatically apply the styles of 0% before the animation starts */
+    animation-fill-mode: backwards; }
+
+.header {
+  /* 95% of viewport height: Height of browser screen without scrolling. */
+  height: 95vh;
+  /* We have 2 background images. The 'a' of RGBA means transparency. */
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  /* Whatever the width of element is, it will always try to fit that element inside of the box. */
+  background-size: cover;
+  /* TOP of the image stays at the top of the container despite window resizing. */
+  background-position: top;
+  position: relative;
+  /* 
+    Specify a polygon(Vieleck), in which the image is still visible. 
+    https://bennettfeely.com/clippy/
+    */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); }
+  .header__logo-box {
+    position: absolute;
+    /* top and left: counting from the parent element, which has its position set to relative */
+    top: 4rem;
+    left: 4rem; }
+  .header__logo {
+    height: 3.5rem; }
+  .header__text-box {
+    position: absolute;
+    /* NOTE: requires transform, otherwise not the center of this element will be in the center, but the left-upper corner of the element. */
+    top: 40%;
+    left: 50%;
+    /* Shift 50% of the width to the left and 50% of the height to the top */
+    transform: translate(-50%, -50%);
+    /* Helpful for the button */
+    text-align: center; }

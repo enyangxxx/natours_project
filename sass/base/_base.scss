@@ -1,0 +1,22 @@
+/* Universal selector to reset browsers. */
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    /* Make the box-sizing property inherit */
+    box-sizing: inherit;
+}
+
+html {
+    /*Default browser font-size in px is 16. If we want 10px, we need 62.5% because 10/16 = 62.5% */
+    font-size: 62.5%;
+}
+
+body {
+    /* 
+    Borders and paddings are no longer added. A width of 200px is indeed 200px.
+    https://www.mediaevent.de/css/box-sizing.html
+    */
+    box-sizing: border-box;
+}

@@ -1,0 +1,42 @@
+.header {
+    /* 95% of viewport height: Height of browser screen without scrolling. */
+    height: 95vh;
+    /* We have 2 background images. The 'a' of RGBA means transparency. */
+    background-image: 
+    linear-gradient(to right bottom, 
+    rgba($color-primary-light, 0.8), 
+    rgba($color-primary-dark, 0.8)), 
+    url(../img/hero.jpg);
+    /* Whatever the width of element is, it will always try to fit that element inside of the box. */
+    background-size: cover;
+    /* TOP of the image stays at the top of the container despite window resizing. */
+    background-position: top;
+    position: relative;
+    /* 
+    Specify a polygon(Vieleck), in which the image is still visible. 
+    https://bennettfeely.com/clippy/
+    */
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+    &__logo-box {
+        position: absolute;
+        /* top and left: counting from the parent element, which has its position set to relative */
+        top: 4rem;
+        left: 4rem;
+    }
+
+    &__logo {
+        height: 3.5rem;
+    }
+
+    &__text-box {
+        position: absolute;
+        /* NOTE: requires transform, otherwise not the center of this element will be in the center, but the left-upper corner of the element. */
+        top: 40%;
+        left: 50%;
+        /* Shift 50% of the width to the left and 50% of the height to the top */
+        transform: translate(-50%, -50%);
+        /* Helpful for the button */
+        text-align: center;
+    }
+}
